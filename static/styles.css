@@ -129,3 +129,8 @@ body, html {
         width: 90%;
     }
 }
+.error-message {
+    color: #dc3545; /* Red for error */
+    margin: 10px 0;
+    font-size: 0.9rem;
+}

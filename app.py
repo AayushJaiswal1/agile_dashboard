@@ -41,6 +41,34 @@ def login():
 def dashboard():
     return "Welcome to the Dashboard!"
 
+#Route for Forgot Password
+@app.route('/forgot-password', methods=['GET', 'POST'])
+def forgot_password():
+    if request.method == 'POST':
+        email = request.form['email']
+        # Add logic to handle password reset, like sending an email
+        flash('Password reset instructions have been sent to your email.', 'success')
+        return redirect(url_for('login'))
+
+    return render_template('forgot_password.html')
+
+#Route for FReset Password
+@app.route('/reset-password', methods=['GET', 'POST'])
+def reset_password():
+    if request.method == 'POST':
+        new_password = request.form['new_password']
+        confirm_password = request.form['confirm_password']
+
+        if new_password == confirm_password:
+            # Logic to reset the user's password in the database
+            flash('Your password has been successfully reset!', 'success')
+            return redirect(url_for('login'))
+        else:
+            flash('Passwords do not match. Please try again.', 'error')
+
+    return render_template('reset_password.html')
+
+
 # Main block to run the app
 if __name__ == '__main__':
     app.run(debug=True)
